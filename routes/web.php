@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CommentController::class, 'show'])->name('comments.show');
+
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+Route::get('/welcome', [UserController::class, 'index']);
+
