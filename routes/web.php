@@ -15,10 +15,13 @@ use App\Http\Controllers\CommentController;
 |
 */
 
+
+
 Route::get('/', [CommentController::class, 'show'])->name('comments.show');
+
+Route::get('/test', [CommentController::class, 'show'])->name('comments.test');
 
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
-Route::get('/welcome', [UserController::class, 'index']);
 

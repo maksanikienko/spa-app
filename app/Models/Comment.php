@@ -10,12 +10,15 @@ class Comment extends Model
         'user_name', 'email', 'home_page', 'captcha', 'text'
     ];
 
-    protected $casts = [
-        //'home_page' => 'nullable|url',
-    ];
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
 
-    public static $rules = [
-       // 'home_page' => 'nullable|url',
-    ];
+    public function parentComment()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
+
 
 }

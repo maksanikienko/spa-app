@@ -25,6 +25,9 @@ class CommentController extends Controller
         $comment->home_page = $validatedData['home_page'];
         $comment->captcha = $validatedData['captcha'];
         $comment->text = $validatedData['text'];
+        $comment->parent_id = $request->input('parent_id');
+        $comment->root_id = $request->input('root_id');
+
 
         $comment->save();
 
@@ -33,8 +36,9 @@ class CommentController extends Controller
 
     public function show()
     {
-        $comments = Comment::all();
-    
-        return view('main', ['comments' => $comments]);
+        $mainComments = Comment::with('replies')->whereNull('parent_id')->simplePaginate(25);
+        //добавить root_id
+    //dd($mainComments->links());
+        return view('main', compact('mainComments'));
     }
 }

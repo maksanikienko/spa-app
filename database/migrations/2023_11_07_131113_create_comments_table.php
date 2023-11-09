@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('home_page')->nullable();
             $table->string('captcha');
             $table->text('text');
+            
         });
     }
 
