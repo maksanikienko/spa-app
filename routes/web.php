@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CaptchaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +19,6 @@ use App\Http\Controllers\CommentController;
 
 Route::get('/', [CommentController::class, 'show'])->name('comments.show');
 
-Route::get('/test', [CommentController::class, 'show'])->name('comments.test');
-
+Route::get('/reload-captcha', [CaptchaController::class, 'reloadCaptcha']);
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
-
-

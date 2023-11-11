@@ -4,6 +4,12 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $comment->user_name }} написал:</h5>
                 <p class="card-text">{{ $comment->text }}</p>
+
+                    
+                            @if($comment->image_path)
+                        <img src="{{ asset('storage/' . $comment->image_path) }}" alt="Comment Image" >
+                            @endif
+                    
             </div>
         </div>
 
@@ -15,7 +21,7 @@
     
         <!-- Форма reply для основного комментария -->
         <div class="card-footer reply-form" data-comment-id="{{ $comment->id }}" style="display:none;">
-            <form method="POST" action="{{ route('comments.store') }}">
+            <form action="{{ route('comments.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                 @include('commentForm')
