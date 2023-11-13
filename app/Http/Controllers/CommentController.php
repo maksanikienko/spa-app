@@ -11,18 +11,17 @@ use Illuminate\Validation\ValidationException;
 
 class CommentController extends Controller
 {
+    
     public function store(Request $request)
     {
-
         try{
             $validatedData = $request->validate([
                 'user_name' => 'required|string|regex:/^[A-Za-z0-9]+$/',
                 'email' => 'required|email',
                 'home_page' => 'nullable|url',
-                'captcha' => 'required|captcha',  //captcha
+                'captcha' => 'required|captcha', 
                 'text' => 'required|string',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-
             ]);
 
         } catch (ValidationException $e) {
@@ -37,7 +36,6 @@ class CommentController extends Controller
         $comment->captcha = $validatedData['captcha'];
         $comment->text = $validatedData['text'];
         $comment->parent_id = $request->input('parent_id');
-        $comment->root_id = $request->input('root_id');
 
         if ($request->hasFile('image')) {
             $uploadedFile = $request->file('image');

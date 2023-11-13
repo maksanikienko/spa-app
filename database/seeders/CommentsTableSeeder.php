@@ -1,0 +1,65 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class CommentsTableSeeder extends Seeder
+{
+    public function run()
+    {
+       DB::table('comments')->truncate();
+
+       $comments = [
+            [
+                'user_name' => 'Alice Smith',
+                'email' => 'alice@example.com',
+                'home_page' => 'https://www.aliceurl.com/',
+                'captcha' => 'xyz',
+                'text' => 'Hello, this is Alice.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_name' => 'Bob Johnson',
+                'email' => 'bob@example.com',
+                'home_page' => 'https://www.boburl.com/',
+                'captcha' => 'def',
+                'text' => 'Greetings from Bob.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_name' => 'Eve Davis',
+                'email' => 'eve@example.com',
+                'home_page' => 'https://www.eveurl.com/',
+                'captcha' => 'uvw',
+                'text' => 'This is Eve saying hi.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_name' => 'Charlie Brown',
+                'email' => 'charlie@example.com',
+                'home_page' => 'https://www.charlieurl.com/',
+                'captcha' => '123',
+                'text' => 'Charlie checking in.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_name' => 'Grace Miller',
+                'email' => 'grace@example.com',
+                'home_page' => 'https://www.graceurl.com/',
+                'captcha' => '456',
+                'text' => 'Greetings from Grace.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        
+    ];
+
+    DB::table('comments')->insert($comments);
+    }
+}

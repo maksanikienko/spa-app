@@ -1,18 +1,16 @@
-// При клике на кнопку перезагрузки
-document.getElementById('reload').addEventListener('click', function () {
-    reloadCaptcha();
+document.querySelectorAll('.captcha-form').forEach(function(form) {
+    form.querySelector('.reload').addEventListener('click', function() {
+        reloadCaptcha(form);
+    });
 });
 
-function reloadCaptcha() {
-    var captchaContainer = document.getElementById('captcha-container');
-    
-        // Отправляем запрос на сервер для получения новой картинки Captcha
-        fetch('/reload-captcha')
-            .then(response => response.json())
-            .then(data => {
-                // Заменяем содержимое контейнера новой картинкой Captcha
-                captchaContainer.innerHTML = data.captcha;
-            })
-            .catch(error => console.error('Ошибка:', error));
-    
+function reloadCaptcha(form) {
+    var captchaContainer = form.querySelector('.captcha-container');
+
+    fetch('/reload-captcha')
+        .then(response => response.json())
+        .then(data => {
+            captchaContainer.innerHTML = data.captcha;
+        })
+        .catch(error => console.error('Ошибка:', error));
 }

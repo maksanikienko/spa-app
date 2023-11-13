@@ -16,7 +16,6 @@
     @foreach ($mainComments as $mainComment)
     @include('comment', ['comment' => $mainComment])        
     @endforeach
-    
             <!-- Pagination   -->
        {{ $mainComments->links()}}
             
@@ -25,7 +24,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Добавить основной комментарий</div>
+                        <div class="card-header">Add Post</div>
                             <div class="card-body">
                                 
                                 <form method="POST" enctype="multipart/form-data" action="{{ route('comments.store') }}">
@@ -38,8 +37,6 @@
             </div>
         </div>
 
-            <script src="{{ asset('js/clickReply.js') }}" defer></script>
-            <script src="{{ asset('js/reloadCaptcha.js') }}" defer></script>
 
     @endsection
     
