@@ -13,16 +13,16 @@ To install the application, follow these steps:
 
 1. [Clone the repository locally]
    
-#https://github.com/maksanikienko/spa-app.git
+https://github.com/maksanikienko/spa-app.git
 
 3. [Run the container using Sail]
    
-#./vendor/bin/sail up -d
+./vendor/bin/sail up -d
 
 5. [Perform database migration]
    
-#sail artisan migrate
+sail artisan migrate
 
 7. [Load dummy data]
    
-#sail artisan db:seed --class=CommentsTableSeeder
+sail artisan db:seed --class=CommentsTableSeeder
