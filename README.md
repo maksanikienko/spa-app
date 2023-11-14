@@ -13,7 +13,7 @@ To install the application, follow these steps:
 
 Clone the repository locally
 
-[https://github.com/maksanikienko/spa-app.git](https://github.com/maksanikienko/spa-app.git)
+git clone [https://github.com/maksanikienko/spa-app.git](https://github.com/maksanikienko/spa-app.git)
 
 Run the container using Sail
 
