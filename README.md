@@ -1,28 +1,25 @@
-# Spa-app
+<body>
 
-Spa-app is a comment exchange application that allows users to:
+    <h1>Spa-app</h1>
 
-- Post their own comments
-- Reply to other users' comments
-- Attach photos to their comments
-- Sort comments
+    <p>Spa-app is a comment exchange application that allows users to:</p>
 
-## Installation
+    <ul>
+        <li>Post their own comments</li>
+        <li>Reply to other users' comments</li>
+        <li>Attach photos to their comments</li>
+        <li>Sort comments</li>
+    </ul>
 
-To install the application, follow these steps:
+    <h2>Installation</h2>
 
-1. [Clone the repository locally]
-   
-git clone https://github.com/maksanikienko/spa-app.git
+    <p>To install the application, follow these steps:</p>
 
-3. [Run the container using Sail]
-   
-./vendor/bin/sail up -d
+    <ol>
+        <li>Clone the repository locally</li>
+        <li>Run the container using Sail</li>
+        <li>Perform database migration</li>
+        <li>Load dummy data</li>
+    </ol>
 
-5. [Perform database migration]
-   
-sail artisan migrate
-
-7. [Load dummy data]
-   
-sail artisan db:seed --class=CommentsTableSeeder
+</body>
