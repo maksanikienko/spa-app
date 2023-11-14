@@ -12,13 +12,17 @@ Spa-app is a comment exchange application that allows users to:
 To install the application, follow these steps:
 
 1. [Clone the repository locally]
-(#(https://github.com/maksanikienko/spa-app.git))
+   
+#https://github.com/maksanikienko/spa-app.git
 
-2. [Run the container using Sail]
-(#./vendor/bin/sail up -d)
+3. [Run the container using Sail]
+   
+#./vendor/bin/sail up -d
 
-3. [Perform database migration]
-(#sail artisan migrate)
+5. [Perform database migration]
+   
+#sail artisan migrate
 
-4. [Load dummy data]
-(#sail artisan db:seed --class=CommentsTableSeeder)
+7. [Load dummy data]
+   
+#sail artisan db:seed --class=CommentsTableSeeder
