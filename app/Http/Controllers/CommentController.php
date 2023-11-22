@@ -7,50 +7,74 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Validation\ValidationException;
 
-
-
 class CommentController extends Controller
 {
-    
-    public function store(Request $request)
+    public function validateData(Request $request)
     {
-        try{
-            $validatedData = $request->validate([
-                'user_name' => 'required|string|regex:/^[A-Za-z0-9]+$/',
-                'email' => 'required|email',
-                'home_page' => 'nullable|url',
-                'captcha' => 'required|captcha', 
-                'text' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-
-        } catch (ValidationException $e) {
-
-            return response()->json(['errors' => $e->validator->errors()], 422);
+        $validator = validator($request->all(), [
+            'user_name' => 'required|string|regex:/^[A-Za-z0-9]+$/',
+            'email' => 'required|email',
+            'home_page' => 'nullable|url',
+            'captcha' => 'required|captcha',
+            'text' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
+        return 'success';
+    }
 
-        $comment = new Comment;
-        $comment->user_name = $validatedData['user_name'];
-        $comment->email = $validatedData['email'];
-        $comment->home_page = $validatedData['home_page'];
-        $comment->captcha = $validatedData['captcha'];
-        $comment->text = $validatedData['text'];
-        $comment->parent_id = $request->input('parent_id');
-
+    public function uploadImage(Request $request)
+    {
         if ($request->hasFile('image')) {
             $uploadedFile = $request->file('image');
-            $path= $uploadedFile->store('comment_images','public');
-            $image = Image::make(storage_path('app/public/' . $path));
-                    
-            // aspectRatio() - сохранение пропорций
-            $image->resize(320, 240, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save();
+            $username = $request->input('user_name');
+            $filename = time() . '_' . $username . '.' . $uploadedFile->getClientOriginalExtension();
 
-            $comment->image_path = $path;        }
+            $path = $uploadedFile->storeAs('comment_images', $filename, 'public');
+
+            $image = Image::make(storage_path('app/public/' . $path));
+
+            $maxWidth = 320;
+            $maxHeight = 240;
+
+            if ($image->width() > $maxWidth || $image->height() > $maxHeight) {
+                $image->resize($maxWidth, $maxHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                $image->save(storage_path('app/public/' . $path));
+            }
+
+            return $path;
+        }
+
+        return response()->json(['error' => 'Изображение не было загружено.'], 400);
+    }
+
+    public function store(Request $request)
+    {
+        $validationResult = $this->validateData($request);
+
+        if ($validationResult !== 'success') {
+            return $validationResult;
+        }
+        $imagePath = $this->uploadImage($request);
+
+        $comment = new Comment;
+        $comment->user_name = $request['user_name'];
+        $comment->email = $request['email'];
+        $comment->home_page = $request['home_page'];
+        $comment->text = $request['text'];
+        $comment->parent_id = $request->input('parent_id');
+
+        if ($imagePath) {
+            $comment->image_path = $imagePath;
+        }
 
         $comment->save();
+
 
         return redirect()->route('comments.show', ['id' => $comment->id]);
 
@@ -60,7 +84,7 @@ class CommentController extends Controller
     {
         $sortBy = $request->input('sort_by', 'created_at');
         $sortOrder = $request->input('sort_order', 'desc');
-    
+
         $mainComments = Comment::with('replies')
             ->whereNull('parent_id')
             ->orderBy($sortBy, $sortOrder)
@@ -68,5 +92,5 @@ class CommentController extends Controller
 
         return view('main', compact('mainComments'));
     }
-    
+
 }

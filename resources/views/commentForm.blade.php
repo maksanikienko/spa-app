@@ -1,4 +1,4 @@
-    
+
                  <!-- Отображение формы комментария -->
     <div class="row captcha-form">
         <div class="col-md-12">
@@ -38,7 +38,7 @@
                 <input type="file" class="form-control" id="image" name="image">
             </div>
 
-            <button type="submit" class="btn btn-primary">Done</button>
+            <button type="submit" class="btn btn-secondary">Done</button>
         </div>
     </div>
 
@@ -87,4 +87,4 @@
         <button type="submit" class="btn btn-primary">Done</button>
 
     -->
-        
+
