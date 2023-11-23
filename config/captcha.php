@@ -9,7 +9,7 @@ return [
         'height' => 70,
         'quality' => 100,
         'math' => false,
-        'expire' => 120,
+        'expire' => 360,
         'encrypt' => false,
     ],
     'math' => [

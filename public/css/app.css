@@ -1,4 +1,17 @@
 
+
+.fixed-header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #B0C4DE; /* Цвет фона header */
+    padding: 10px;
+    text-align: center;
+    color: #2F4F4F; /* Цвет текста */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень текста */
+    z-index: 1000; /* Устанавливаем z-index, чтобы header был выше других элементов */
+}
+
 .container {
     margin-top: 50px;
     margin-bottom: 50px;

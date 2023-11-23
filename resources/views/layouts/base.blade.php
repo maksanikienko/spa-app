@@ -19,15 +19,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js" integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Import JS    -->
     <script src="{{ asset('js/reloadCaptcha.js') }}" defer></script>
     <script src="{{ asset('js/clickReply.js') }}" defer></script>
 
 
-    <!-- Import JS    -->
 
 </head>
     <body>
-        <div class="container">
+    <div class="fixed-header">
+        <h1>Make a Post</h1>
+    </div>
+
+    <div class="container">
             @yield('main_page')
 
 
