@@ -22,3 +22,5 @@ Route::get('/', [CommentController::class, 'show'])->name('comments.show');
 Route::get('/reload-captcha', [CaptchaController::class, 'reloadCaptcha']);
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+//Route::get('/memoji', [CommentController::class, 'selectMemoji']);

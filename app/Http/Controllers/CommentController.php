@@ -5,6 +5,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\ValidationException;
 
 class CommentController extends Controller
@@ -49,8 +50,6 @@ class CommentController extends Controller
 
             return $path;
         }
-
-        return response()->json(['error' => 'Изображение не было загружено.'], 400);
     }
 
     public function store(Request $request)
@@ -60,21 +59,20 @@ class CommentController extends Controller
         if ($validationResult !== 'success') {
             return $validationResult;
         }
-        $imagePath = $this->uploadImage($request);
 
         $comment = new Comment;
         $comment->user_name = $request['user_name'];
         $comment->email = $request['email'];
         $comment->home_page = $request['home_page'];
+        $comment->avatar_image_path = $request->input('avatar');
         $comment->text = $request['text'];
         $comment->parent_id = $request->input('parent_id');
 
+        $imagePath = $this->uploadImage($request);
         if ($imagePath) {
             $comment->image_path = $imagePath;
         }
-
         $comment->save();
-
 
         return redirect()->route('comments.show', ['id' => $comment->id]);
 
@@ -84,13 +82,27 @@ class CommentController extends Controller
     {
         $sortBy = $request->input('sort_by', 'created_at');
         $sortOrder = $request->input('sort_order', 'desc');
+        $avatar = $this->selectAvatar();
 
         $mainComments = Comment::with('replies')
             ->whereNull('parent_id')
             ->orderBy($sortBy, $sortOrder)
             ->simplePaginate(25);
 
-        return view('main', compact('mainComments'));
+        return view('main', compact('mainComments','avatar'));
+    }
+    public function selectAvatar():array
+    {
+        $avatarPath = storage_path('app/public/avatar_memoji_images');
+        $avatarFiles = File::allFiles($avatarPath);
+
+        $avatars = [];
+
+        foreach ($avatarFiles as $file) {
+            $avatars[pathinfo($file->getFilename(), PATHINFO_FILENAME)] = $file->getFilename();
+        }
+
+        return $avatars;
     }
 
 }
