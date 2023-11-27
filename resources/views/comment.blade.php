@@ -20,11 +20,11 @@
 
              <!-- Кнопка Reply -->
         <div class="card-footer">
-            <button class="btn btn-secondary btn-sm reply-btn" data-comment-id="{{ $comment->id }}">Reply</button>
+            <button class="btn btn-primary btn-sm reply-btn" data-comment-id="{{ $comment->id }}">Reply</button>
         </div>
 
          <!-- Форма reply для основного комментария -->
-         <div class="card-footer reply-form captcha-container" data-comment-id="{{ $comment->id }}" style="display:none;">
+         <div class="card-footer reply-form" data-comment-id="{{ $comment->id }}" style="display:none;">
             <form action="{{ route('comments.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="parent_id" value="{{ $comment->id }}">

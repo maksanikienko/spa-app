@@ -59,7 +59,6 @@ class CommentController extends Controller
         if ($validationResult !== 'success') {
             return $validationResult;
         }
-
         $comment = new Comment;
         $comment->user_name = $request['user_name'];
         $comment->email = $request['email'];

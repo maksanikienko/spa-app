@@ -13,19 +13,19 @@
 
     @include('sortByForm')
 
-    @foreach ($mainComments as $mainComment)
-    @include('comment', ['comment' => $mainComment])
-    @endforeach
+        @foreach ($mainComments as $mainComment)
+            @include('comment', ['comment' => $mainComment])
+        @endforeach
             <!-- Pagination   -->
        {{ $mainComments->links()}}
 
             <!-- Подключение Основной формы -->
         <div class="main-form">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">Add Post</div>
-                            <div class="card-body">
+                        <div class="card-body">
+                            <div class="card-header text-center"><h3>Share a Post</h3></div>
 
                                 <form method="POST" enctype="multipart/form-data" action="{{ route('comments.store') }}">
                                     @csrf
@@ -36,8 +36,6 @@
                 </div>
             </div>
         </div>
-
-
     @endsection
 
 </body>
