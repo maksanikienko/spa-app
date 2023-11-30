@@ -35,9 +35,7 @@
 
              <!-- Вывод reply постов -->
     <div class="card-child">
-            <div class="child-comments ml-4">
                 @foreach($comment->replies as $reply)
                     @include('comment', ['comment' => $reply])
                 @endforeach
-            </div>
     </div>

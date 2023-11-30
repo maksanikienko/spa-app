@@ -32,7 +32,9 @@
             <h1>Share a Post</h1>
         </div>
         <div class="container">
+            <div class="narrow-container">
             @yield('main_page')
+            </div>
         </div>
     </body>
 
