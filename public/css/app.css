@@ -1,15 +1,22 @@
 
 .fixed-header {
-    top: 0;
-    left: 0;
-    width: 100%;
     background-color: #B0C4DE; /* Цвет фона header */
-    padding: 10px;
-    text-align: center;
+    padding: 20px;
     color: #2F4F4F; /* Цвет текста */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень текста */
-    z-index: 1000; /* Устанавливаем z-index, чтобы header был выше других элементов */
+    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* Выравнивание элементов по вертикали */
 }
+.fixed-header h1 {
+    margin: auto; /* Устанавливаем margin: 0 для удаления стандартных отступов и автоматическое выравнивание по центру */
+}
+.header-buttons {
+    display: flex;
+    gap: 20px; /* Расстояние между элементами */
+    margin-right: 20px; /* Увеличьте расстояние справа от .log-buttons */
+}
+
 
 .container {
     margin-top: 50px;
