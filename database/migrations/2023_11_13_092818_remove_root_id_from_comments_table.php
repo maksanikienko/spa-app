@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('comments', function (Blueprint $table) {
             $table->dropForeign('comments_root_id_foreign');
         });
-    
+
         Schema::table('comments', function (Blueprint $table) {
             $table->dropColumn('root_id');
         });
@@ -26,7 +26,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('root_id')->nullable();
+        });
+
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreign('root_id')->references('id')->on('comments');
         });
     }
 };
