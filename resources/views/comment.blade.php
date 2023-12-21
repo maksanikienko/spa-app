@@ -28,7 +28,11 @@
             <form action="{{ route('comments.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                @include('commentForm')
+                <div id="app">
+<post-component :avatar="{{ json_encode($avatar) }}">
+                @include('comment-form')
+</post-component>
+                </div>
             </form>
         </div>
     </div>
