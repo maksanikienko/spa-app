@@ -26,3 +26,4 @@ function reloadCaptcha(form) {
         .catch(error => console.error('Ошибка:', error));
 }
 
+window.reloadCaptcha = reloadCaptcha;

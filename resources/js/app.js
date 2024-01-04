@@ -5,6 +5,11 @@
  */
 
 import './bootstrap';
+import './reload-captcha';
+import './select-form';
+import './update-message-form';
+import './delete-message-confirm';
+
 import {createApp} from 'vue';
 import PostComponent from './components/PostComponent.vue';
 /**

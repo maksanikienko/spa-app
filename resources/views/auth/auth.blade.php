@@ -1,20 +1,19 @@
 
-@include('layouts.base')
+@extends('layouts.base')
+<html>
+
     <title>Authentication</title>
 
     <body>
-        <div id="vue">
-
+        <header>
             <!-- Header -->
             <div class="fixed-header ">
                 <a href="{{ url('/') }}" class="btn btn-primary">&#8592;Back to Main</a>
-                @include('layouts.header')
             </div>
-
+        </header>
             <!-- Login/Registration Form -->
             <main class="py-4">
                 @yield('auth-section')
             </main>
-
-        </div>
     </body>
+</html>

@@ -1,5 +1,5 @@
-<!-- Форма выбора сортировки -->
-    <form action="{{ route('comments.show') }}" method="get" class="d-flex flex-row flex-md-row align-items-center justify-content-center mb-3">
+<!-- Sort Form -->
+    <form action="{{ route('comments.show') }}" method="get" class="sort-form">
         @csrf
 
         <select class="select mb-2 me-md-2" name="sort_by" id="sort_by">

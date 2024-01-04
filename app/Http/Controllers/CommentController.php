@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
-use Illuminate\Validation\ValidationException;
 
 class CommentController extends Controller
 {
-    public function validateData(Request $request)
+    public function validateData(Request $request) :string
     {
         $validator = validator($request->all(), [
-            'user_name' => 'required|string|regex:/^[A-Za-z0-9]+$/',
+            'user_name' => 'required|string|regex:/^[A-Za-z0-9\s]+$/',
             'email' => 'required|email',
             'home_page' => 'nullable|url',
+            'avatar' => 'required|string',
             'captcha' => 'required|captcha',
             'text' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -103,5 +103,27 @@ class CommentController extends Controller
 
         return $avatars;
     }
+
+    public function destroy(Comment $comment)
+    {
+        Comment::where('parent_id', $comment->id)->delete();
+
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        $request->validate([
+            'text' => 'required|string',
+        ]);
+
+        $comment->update(['text' => $request->text]);
+
+        return redirect()->route('comments.show')->with('success', 'Comment updated successfully.');
+    }
+
+
 
 }
