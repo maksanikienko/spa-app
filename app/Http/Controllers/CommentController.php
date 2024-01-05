@@ -36,7 +36,7 @@ class CommentController extends Controller
             $path = $uploadedFile->storeAs('comment_images', $filename, 'public');
 
             $image = Image::make(storage_path('app/public/' . $path));
-
+            
             $maxWidth = 320;
             $maxHeight = 240;
 

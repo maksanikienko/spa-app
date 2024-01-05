@@ -42,7 +42,8 @@
                                 :auth-username="{{ json_encode(Auth::user()->name) }}"
                                 :auth-email="{{ json_encode(Auth::user()->email) }}"
                             @endif
-                            :avatar="{{ json_encode($avatar) }}">
+                            :avatar="{{ json_encode($avatar) }}"
+                            :button-name="{{ json_encode('Reply') }}">
                         </post-component>
                     </form>
                 </div>

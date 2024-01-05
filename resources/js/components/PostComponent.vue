@@ -11,9 +11,13 @@ export default {
         };
     },
     props: {
+        buttonName: String,
         avatar: { },
         authUsername: '',
         authEmail: '',
+    },
+    mounted() {
+        this.refreshCaptcha();
     },
     methods: {
         refreshCaptcha() {
@@ -43,7 +47,7 @@ export default {
 <template>
     <div id="app">
         <button class="btn btn-primary btn-sm reply-btn" @click="show = !show">
-            Add Post
+            {{ buttonName }}
         </button>
 
         <transition name="fade">
@@ -95,11 +99,9 @@ export default {
                     <!-- Captcha field -->
                     <div class="captcha-field">
                         <div class="captcha-form">
-                            <!-- Load Captcha -->
-                            <button v-if="!captchaSrc" class="btn btn-danger btn-reload" @click="refreshCaptcha"> Load Captcha &#x21bb; </button>
-                            <div class="captcha-container" v-html="captchaSrc"></div>
+                            <div class="captcha-image" v-html="captchaSrc"></div>
                             <!-- Reload Captcha -->
-                            <button v-if="captchaSrc" class="btn btn-danger reload" @click="refreshCaptcha">&#x21bb;</button>
+                            <button  class="btn btn-danger reload" @click="refreshCaptcha">&#x21bb;</button>
                         </div>
                         <input type="text" id="captcha" name="captcha" required placeholder="Enter the code">
                     </div>
@@ -179,6 +181,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
 
 .custom-file-label {
